@@ -1,0 +1,17 @@
+{
+  "name": "k8s-nodejs-backendapi",
+  "version": "1.0.0",
+  "description": "Simple Node.js Backend API for Kubernetes with Argo Pipeline",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo 'Unit tests passed (placeholder)' && exit 0",
+    "integration-test": "echo 'Integration tests passed (placeholder)' && exit 0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "author": "mofwili",
+  "license": "MIT"
+}
