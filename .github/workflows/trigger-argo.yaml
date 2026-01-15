@@ -1,0 +1,34 @@
+name: Trigger Argo CI on Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Argo Workflow
+        env:
+          ARGO_TOKEN: ${{ secrets.ARGO_TOKEN }}
+        run: |
+          curl -v -X POST \
+            -H "Authorization: Bearer $ARGO_TOKEN" \
+            -H "Content-Type: application/json" \
+            http://10.4.13.27:31256/api/v1/workflows/argo/submit \
+            -d '{
+              "namespace": "argo",
+              "resource": {
+                "apiVersion": "argoproj.io/v1alpha1",
+                "kind": "Workflow",
+                "metadata": {
+                  "generateName": "ci-cd-"
+                },
+                "spec": {
+                  "workflowTemplateRef": {
+                    "name": "ci-cd-pipeline"
+                  }
+                }
+              }
+            }'
